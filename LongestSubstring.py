@@ -1,12 +1,12 @@
-# from collections import defaultdict
 class LongestSubstring:
     """ Leetcode 3
     """
 
 
     def lengthOfLongestSubstring(self, s: str) -> int:
+        """ Intuition was DP. Implementation is space and time expensive. """
         _len_of_sub = 0
-        dp = [""]*(len(s) + 1) # longest substring at element i
+        dp = [""]*(len(s) + 1)
         if len(s) == 0:
             return 0
         if len(s) == 1:
@@ -22,7 +22,6 @@ class LongestSubstring:
                         break
             else:
                 dp[i] = dp[i-1] + s[i]
-            # print(dp)
             _len_of_sub = max(_len_of_sub, len(dp[i]))
         return _len_of_sub
 
