@@ -11,11 +11,8 @@ class AddLinkedLists:
     """ Leetcode2
     """
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        # 342 + 465
         root = _result = ListNode(0)
         _remainder = 0
-        if l1.val == 0 and l2.val == 0:
-            return ListNode(0)
         while l1 or l2 or _remainder:
             _val1 = _val2 = 0
             if l1:
@@ -24,11 +21,11 @@ class AddLinkedLists:
             if l2:
                 _val2 = l2.val
                 l2 = l2.next
-            _result.next = ListNode((_val1 + _val2) %10 + _remainder)
+            _result.next = ListNode((_val1 + _val2 + _remainder) %10)
             if _val1 + _val2 + _remainder >= 10:
                 _remainder = 1
             else:
-                _remainder =0
+                _remainder = 0
             _result = _result.next
         return root.next
 
