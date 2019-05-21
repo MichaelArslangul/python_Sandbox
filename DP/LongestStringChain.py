@@ -9,12 +9,9 @@ class LongestStringCheck:
         s_words = sorted(words, key = len)
         for _word in s_words:
             for i in range(len(_word)):
-                print(dp)
-                print(_word)
-                print(_word[:i] + _word[i+1:])
                 if _word[:i] + _word[i+1:] in dp.keys():
-                    print("in")
-                    dp[_word] = dp[_word[:i] + _word[i+1:]].append(_word)
+                    dp[_word] = dp[_word[:i] + _word[i+1:]]
+                    dp[_word].append(_word)
                 else:
                     dp[_word].append(_word)
         return dp
