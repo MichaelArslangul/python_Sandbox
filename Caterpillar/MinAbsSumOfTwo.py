@@ -3,18 +3,6 @@ class MinAbsSumOfTwo:
     https://app.codility.com/programmers/lessons/15-caterpillar_method/min_abs_sum_of_two/
     """
 
-    # def solution(self, A):
-    #     N =len(A)
-    #     _result = float("inf")
-    #     j = 0
-    #     for i in range(N):
-    #         j = i+1
-    #         _result = min(_result, abs(A[i] + A[i]) )
-    #         while j < N:
-    #             _result = min(_result, abs(A[i] + A[j]) )
-    #             j += 1
-    #     return _result
-
     def solution(self, A):
         value = 2000000000
         _back = 0
