@@ -66,7 +66,6 @@ class BinaryTree:
         while _queue:
             _temp = _queue.popleft()
             _level_count += 1
-                # _visited.append(_temp)
             print(_temp.value)
             _level_count -= 1
             if _temp.left:
