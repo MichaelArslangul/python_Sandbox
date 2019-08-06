@@ -32,5 +32,23 @@ class Atoi:
 
 atoi = Atoi()
 # input = "words and 987"
-input="2+12223 words 22222"
+input="212223 words 22222"
 print("result for string: {} is: {}".format(input, atoi.myAtoi(input)))
+
+
+class Solution:
+    def constructMaximumBinaryTree(self, nums: List[int]) -> TreeNode:
+        if len(nums) == 0:
+            return None
+        if len(nums) == 1:
+            return TreeNode(nums[0])
+        _tree = TreeNode()
+        return self.build_tree_helper(nums, _tree)
+
+    def build_tree_helper(self, nums, tree):
+        tree.val = max(nums)
+        _left = nums[:nums.index(max(nums))]
+        _right = nums[nums.index(max(nums)) +1 : ]
+        self.build_tree_helper(_left, tree.left)
+        self.build_tree_helper(_left, tree.right)
+        return tree
