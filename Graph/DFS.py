@@ -74,7 +74,6 @@ class DFS:
     def dfs(self):
         _stack = []
         visited = []
-        _result = []
         if self.tree.root is None:
             raise Exception("Can't traverse an empty tree")
         else:
