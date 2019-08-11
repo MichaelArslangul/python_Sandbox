@@ -40,7 +40,7 @@ class WorldLadderII:
                 if _temp_word == endWord:
                     return layer_count
                 else:
-                    _layer = layer_count +1
+                    _layer = layer_count + 1
                     for _ in self.findOneOffWords(_temp_word, wordList):
                         _queue.append((_, _layer))
                     _visited.add(_temp_word)
