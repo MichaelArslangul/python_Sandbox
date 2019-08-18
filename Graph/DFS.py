@@ -58,7 +58,6 @@ class BinaryTree:
             for v in self.root.in_order():
                 if v == target:
                     return True
-
         return False
 
 
@@ -88,6 +87,23 @@ class DFS:
                         _stack.append(_temp_node.left)
         return visited
 
+    def recursive_dfs(self):
+        if self.tree.root is None:
+            raise Exception("Can't traverse an empty tree")
+        else:
+            visited = []
+            self.dfs_helper(self.tree.root, visited)
+
+    def dfs_helper(self, node, visited):
+        visited.append(node)
+        print(node.value)
+
+        if node.left and node.left not in visited:
+            self.dfs_helper(node.left, visited)
+        if node.right and node.right not in visited:
+            self.dfs_helper(node.right, visited)
+
+
     def print(self):
         print("depth first search: ")
         for i in self.dfs():
@@ -109,3 +125,5 @@ bin.root.right.add_left(0)
 bin.root.right.add_right(8)
 dfs = DFS(bin)
 dfs.print()
+print("between dfs calls")
+dfs.recursive_dfs()
