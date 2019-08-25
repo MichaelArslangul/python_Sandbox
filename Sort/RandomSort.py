@@ -3,7 +3,7 @@ import random
 
 class RandomSort:
     '''
-    random.random()
+    random.random() - not sure this works. Please verify before using.
     '''
 
     def r_sort(self, list):
