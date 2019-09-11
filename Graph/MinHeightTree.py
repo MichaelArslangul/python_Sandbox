@@ -49,6 +49,7 @@ class MinHeightTree:
             elif _temp == "end" and not _queue:
                 break
         return _level
+    
 
 min_height = MinHeightTree()
 # n = 4
