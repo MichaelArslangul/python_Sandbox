@@ -38,6 +38,7 @@ class WorldLadderII:
             _temp_word, layer_count = _queue.popleft()
             if _temp_word not in _visited:
                 if _temp_word == endWord:
+                    print(_visited)
                     return layer_count
                 else:
                     _layer = layer_count + 1
