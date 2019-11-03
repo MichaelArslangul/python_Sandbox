@@ -1,43 +1,39 @@
-def quickSort(alist):
+import random
+
+def quicksort(items):
     """
-    This implementation uses the first element as a pivotvalue
+    quickSort using a random pivot.
     """
-  quickSortHelper(alist,0,len(alist)-1)
+    def sort(lst, l, r):
+        # base case
+        if r <= l:
+            return
 
-def quickSortHelper(alist,first,last):
+        # choose random pivot
+        pivot_index = random.randint(l, r)
 
-  if first<last:
-      splitpoint = partition(alist,first,last)
-      quickSortHelper(alist,first,splitpoint-1)
-      quickSortHelper(alist,splitpoint+1,last)
+        # move pivot to first index
+        lst[l], lst[pivot_index] = lst[pivot_index], lst[l]
 
-def partition(alist,first,last):
+        # partition
+        i = l
+        for j in range(l+1, r+1):
+            if lst[j] < lst[l]:
+                i += 1
+                lst[i], lst[j] = lst[j], lst[i]
 
-  pivotvalue = alist[first]
-  leftmark = first+1
-  rightmark = last
-  done = False
+        # place pivot in proper position
+        lst[i], lst[l] = lst[l], lst[i]
 
-  while not done:
-      while leftmark <= rightmark and alist[leftmark] <= pivotvalue:
-          leftmark = leftmark + 1
+        # sort left and right partitions
+        sort(lst, l, i-1)
+        sort(lst, i+1, r)
 
-      while alist[rightmark] >= pivotvalue and rightmark >= leftmark:
-          rightmark = rightmark -1
+    if items is None or len(items) < 2:
+        return
 
-      if rightmark < leftmark:
-          done = True
-      else:
-          temp = alist[leftmark]
-          alist[leftmark] = alist[rightmark]
-          alist[rightmark] = temp
-
-  temp = alist[first]
-  alist[first] = alist[rightmark]
-  alist[rightmark] = temp
-
-  return rightmark
+    sort(items, 0, len(items) - 1)
 
 alist = [54,26,93,17,77,31,44,55,20]
-quickSort(alist)
+quicksort(alist)
 print(alist)
