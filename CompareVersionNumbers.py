@@ -4,7 +4,6 @@ class CompareVersionNumbers:
     def compareVersion(self, version1: str, version2: str) -> int:
         for v1, v2 in zip_longest(map(int, version1.split('.')), map(int, version2.split('.')),
                                   fillvalue = 0):
-            print(v1, v2)
             if v1 > v2:
                 return 1
             elif v1 < v2:
