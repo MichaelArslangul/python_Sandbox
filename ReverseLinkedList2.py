@@ -9,16 +9,27 @@ class Node:
 class LinkedList:
 
     def __init__(self, head: Node = None):
-        self.head = head
+        self.head = None
 
     def reverse_linked_list(self, ReverseLinkedList):
-        if not self.head:
-            return []
-        previous_node = None
-        current_node = self.head
-        next_node = current_node.next
+        current = self.head
+        prev = None
+        while current is not None:
+            next = current.next
+            current.next = prev
+            prev = current
+            current.next = next
 
+    def push(self, data):
+        node = Node(data)
+        node.next = self.head
+        self.head = node
 
+    def print(self):
+        node = self.head
+        while node:
+            print(self.head)
+            node = node.next
 
 
 ll = LinkedList()
