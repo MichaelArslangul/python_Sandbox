@@ -1,49 +1,30 @@
-class Candy:
-    """ There are N children standing in a line. Each child is assigned a rating value.
+class MinMaxStack:
+	def __init__(self):
+		self.stack = []
+		self.min_max = []
 
-    You are giving candies to these children subjected to the following requirements:
+    def peek(self):
+		print(self.stack[-1])
 
-    Each child must have at least one candy.
-    Children with a higher rating get more candies than their neighbors.
-    What is the minimum candies you must give?
+    def pop(self):
+		n = len(self.stack)
+		if n > 0:
+			del self.min_max[-1]
+			return self.stack.pop(len(self.stack) - 1)
+		else:
+			return None
 
-    Example 1:
+    def push(self, number):
+		self.stack.append(number)
+		if len(self.stack) == 0:
+			self.min_max = [number, number]
+		else:
+			_min = min(number, self.min_max(len(self.min_max) - 1)[0])
+			_max = max(number, self.min_max(len(self.min_max) - 1)[1])
+			self.min_max.append([_min, _max])
 
-    Input: [1,0,2]
-    Output: 5
-    Explanation: You can allocate to the first, second and third child with 2, 1, 2 candies respectively.
-    Example 2:
+    def getMin(self):
+		return self.min_max[-1][0]
 
-    Input: [1,2,2]
-    Output: 4
-    Explanation: You can allocate to the first, second and third child with 1, 2, 1 candies respectively.
-             The third child gets 1 candy because it satisfies the above two conditions.
-    """
-
-    def candy(self, ratings):
-        """
-        :type ratings: List[int]
-        :rtype: int
-        """
-        _result_forward = [1]*len(ratings)
-        _result_backward = [1]*len(ratings)
-        _sum = 0
-
-        for i in range(1, len(ratings)):
-            if ratings[i] > ratings[i-1]:
-                _result_forward[i] = _result_forward[i-1] + 1
-
-        for i in range(len(ratings) -2, -1, -1):
-            if ratings[i] > ratings[i+1]:
-                _result_backward[i] = _result_backward[i+1] +1
-
-        for i in range(len(ratings)):
-            _sum += max(_result_forward[i], _result_backward[i])
-        return _sum
-
-
-can = Candy()
-# _input=[1,3,2,2,1]
-_input=[1,2,87,87,87,2,1]
-# _input=[1,0,2]
-print("Output for: {} is: {}".format(_input, can.candy(_input)))
+    def getMax(self):
+		return self.min_max[-1][1]
