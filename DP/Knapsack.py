@@ -1,25 +1,47 @@
-class LevenshteinDistance:
+# A naive recursive implementation of 0-1 Knapsack Problem
 
-    def levenshteinDistance(self, str1, str2):
-    	length1 = len(str1)
-    	length2 = len(str2)
-    	if length1 == 0:
-    		return length2
-    	if length2 == 0:
-    		return length1
-    	DP = [[0 for _ in range(length2 +1)] for _ in range(length1+1)]
-    	for i in range(length1+1):
-    		for j in range(length2+1):
-    			if i == 0:
-    				DP[i][j] = j
-    			elif j == 0:
-    				DP[i][j] = i
-    			elif str1[i-1] == str2[j-1]:
-    				DP[i][j] = DP[i-1][j-1]
-    			else:
-    				DP[i][j] = min(DP[i-1][j], DP[i-1][j-1], DP[i][j-1]) + 1
-    	return DP[-1][-1]
+# Returns the maximum value that can be put in a knapsack of
+# capacity W
+def knapSack(W, wt, val, n):
 
-ld = LevenshteinDistance()
-print("Levenshtein Distance between: {} and {} is: {}".format(
-    "sunday", "saturday",ld.levenshteinDistance("sunday", "saturday")))
+    # Base Case
+    if n == 0 or W == 0 :
+        return 0
+
+    # If weight of the nth item is more than Knapsack of capacity
+    # W, then this item cannot be included in the optimal solution
+    if (wt[n-1] > W):
+        return knapSack(W, wt, val, n-1)
+
+    # return the maximum of two cases:
+    # (1) nth item included
+    # (2) not included
+    else:
+        return max(val[n-1] + knapSack(W-wt[n-1], wt, val, n-1),
+                   knapSack(W, wt, val, n-1))
+
+# A Dynamic Programming based Python
+# Program for 0-1 Knapsack problem
+# Returns the maximum value that can
+# be put in a knapsack of capacity W
+def dpknapSack(W, wt, val, n):
+    K = [[0 for x in range(W + 1)] for x in range(n + 1)]
+
+    # Build table K[][] in bottom up manner
+    for i in range(n + 1):
+        for w in range(W + 1):
+            if i == 0 or w == 0:
+                K[i][w] = 0
+            elif wt[i-1] <= w:
+                K[i][w] = max(val[i-1] + K[i-1][w-wt[i-1]],  K[i-1][w])
+            else:
+                K[i][w] = K[i-1][w]
+
+    return K[n][W]
+
+# Driver program to test above function
+val = [60, 100, 120]
+wt = [10, 20, 30]
+W = 50
+n = len(val)
+print(dpknapSack(W, wt, val, n)) 
